@@ -1,19 +1,29 @@
 package com.app.utils;
 
-import java.sql.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class AuthUtils {
-    // Cấu hình kết nối cơ sở dữ liệu
-    private static final String DB_URL = "jdbc:mysql://localhost:3307/db_http_simple_server"; // Thay đổi theo cơ sở dữ liệu của bạn
-    private static final String DB_USERNAME = "root"; // Thay đổi theo cơ sở dữ liệu của bạn
-    private static final String DB_PASSWORD = "12345678"; // Thay đổi theo cơ sở dữ liệu của bạn
+    private static final Logger logger = LoggerFactory.getLogger(AuthUtils.class);
 
+    /**
+     * Xác thực người dùng bằng cách kiểm tra thông tin đăng nhập trong cơ sở dữ liệu.
+     *
+     * @param username Tên người dùng
+     * @param password Mật khẩu
+     * @return true nếu thông tin đăng nhập hợp lệ, ngược lại false
+     */
     public static boolean authenticate(String username, String password) {
         // Câu truy vấn sử dụng PreparedStatement để ngăn chặn SQL Injection
         String query = "SELECT COUNT(*) FROM admin WHERE username = ? AND password = ?";
 
         // Sử dụng try-with-resources để tự động đóng các tài nguyên
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (Connection connection = DatabaseUtils.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             // Đặt các tham số cho PreparedStatement
             preparedStatement.setString(1, username);
@@ -23,12 +33,16 @@ public class AuthUtils {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     int count = resultSet.getInt(1);
-                    return count > 0; // Trả về true nếu tìm thấy ít nhất một bản ghi
+                    if (count > 0) {
+                        return true; // Trả về true nếu tìm thấy ít nhất một bản ghi
+                    } else {
+                        return false;
+                    }
                 }
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Database error during authentication for user '{}': {}", username, e.getMessage());
             // Bạn có thể xử lý ngoại lệ theo cách phù hợp với ứng dụng của bạn
         }
 
