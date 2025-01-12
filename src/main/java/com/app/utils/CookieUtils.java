@@ -36,7 +36,6 @@ public class CookieUtils {
 
         } catch (SQLException e) {
             logger.error("Error creating session for user '{}': {}", username, e.getMessage());
-            // Có thể ném ngoại lệ hoặc xử lý theo cách khác tùy yêu cầu
         }
 
         // Tạo header Set-Cookie

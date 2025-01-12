@@ -31,7 +31,7 @@ public class HomeHandler implements HttpHandler {
         serverController.addNewClient(new ClientInfo(clientIP, clientPort));
 
 
-        // Đọc tệp index.html từ thư mục resources
+        // Đọc file index.html từ resources
         InputStream is = getClass().getClassLoader().getResourceAsStream("index.html");
         if (is == null) {
             String notFoundResponse = "404 (Not Found)\n";
