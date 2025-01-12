@@ -18,43 +18,55 @@ public class ServerController {
     private ServerConfig config;
     private List<ClientInfo> connectedClients = Collections.synchronizedList(new ArrayList<>());
 
+    private boolean isRunning = false;
+
+    public boolean isRunning() {
+        return isRunning;
+    }
+
     public ServerController(ServerConfig config) {
         this.config = config;
     }
 
     public void startServer() throws IOException {
+        if (isRunning) {
+            // Nếu server đang chạy, hiển thị thông báo
+            System.out.println("Server is already running on http://localhost:" + config.getPort());
+            return;
+        }
+
+        // Tạo server nếu chưa chạy
         server = HttpServer.create(new InetSocketAddress(config.getPort()), 0);
 
         // Thêm các context với handler tương ứng
         server.createContext("/login", new AuthHandler());
-        server.createContext("/checkAuthorized", new AdminHandler(this));
+        server.createContext("/admin", new AdminHandler(this));
         server.createContext("/", new HomeHandler());
 
-        // Thêm listener để theo dõi kết nối
-        server.createContext("/", exchange -> {
-            // Thêm thông tin client
-            String clientIP = exchange.getRemoteAddress().getAddress().getHostAddress();
-            int clientPort = exchange.getRemoteAddress().getPort();
-            System.out.println("IP: " + clientIP + ", Port: " + clientPort);
-
-            connectedClients.add(new ClientInfo(clientIP, clientPort));
-
-            System.out.println(clientIP);
-            System.out.println(clientPort);
-
-            connectedClients.removeIf(client -> client.getIpAddress().equals(clientIP) && client.getPort() == clientPort);
-        });
-
+        // Cấu hình executor
         server.setExecutor(null); // Sử dụng executor mặc định
         server.start();
+        isRunning = true; // Cập nhật trạng thái server
         System.out.println("Server is running on http://localhost:" + config.getPort());
     }
 
     public void stopServer() {
-        if (server != null) {
-            server.stop(0);
+        if (isRunning) {
+            isRunning = false;
             System.out.println("Server stopped.");
+        } else {
+            System.out.println("Server is not running.");
         }
+    }
+
+    // set cổng
+    public void setPort(int port) {
+        config.setPort(port);
+    }
+
+    // set đường dẫn đến file hệ thống của http server
+    public void setFilePath(String filePath) {
+        config.setFilePath(filePath);
     }
 
     public List<ClientInfo> getConnectedClients() {
