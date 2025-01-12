@@ -17,6 +17,11 @@ public class HomeHandler implements HttpHandler {
             return;
         }
 
+        String clientIP = exchange.getRemoteAddress().getAddress().getHostAddress();
+        int clientPort = exchange.getRemoteAddress().getPort();
+        System.out.println("IP: " + clientIP + ", Port: " + clientPort);
+
+
         // Đọc tệp index.html từ thư mục resources
         InputStream is = getClass().getClassLoader().getResourceAsStream("index.html");
         if (is == null) {
