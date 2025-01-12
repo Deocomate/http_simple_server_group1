@@ -5,18 +5,18 @@ import com.app.handlers.AdminHandler;
 import com.app.handlers.AuthHandler;
 import com.app.handlers.HomeHandler;
 import com.app.models.ClientInfo;
+import com.app.utils.DatabaseUtils;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ServerController {
     private HttpServer server;
     private ServerConfig config;
-    private List<ClientInfo> connectedClients = Collections.synchronizedList(new ArrayList<>());
+    private List<ClientInfo> connectedClients = new CopyOnWriteArrayList<>();
 
     private boolean isRunning = false;
 
@@ -41,7 +41,7 @@ public class ServerController {
         // Thêm các context với handler tương ứng
         server.createContext("/login", new AuthHandler());
         server.createContext("/admin", new AdminHandler(this));
-        server.createContext("/", new HomeHandler());
+        server.createContext("/", new HomeHandler(this));
 
         // Cấu hình executor
         server.setExecutor(null); // Sử dụng executor mặc định
@@ -53,7 +53,11 @@ public class ServerController {
     public void stopServer() {
         if (isRunning) {
             isRunning = false;
+            server.stop(0); // Dừng server ngay lập tức
             System.out.println("Server stopped.");
+
+            // Đóng connection pool
+            DatabaseUtils.shutdown();
         } else {
             System.out.println("Server is not running.");
         }
@@ -70,6 +74,17 @@ public class ServerController {
     }
 
     public List<ClientInfo> getConnectedClients() {
-        return new ArrayList<>(connectedClients);
+        return connectedClients;
+    }
+
+    public void addNewClient(ClientInfo client) {
+        for (ClientInfo existingClient : connectedClients) {
+            if (existingClient.getIpAddress().equals(client.getIpAddress())) {
+                // Client đã tồn tại, không thêm lại
+                return;
+            }
+        }
+        // Nếu không tìm thấy, thêm mới client
+        connectedClients.add(client);
     }
 }

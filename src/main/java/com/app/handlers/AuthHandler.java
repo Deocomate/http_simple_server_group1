@@ -10,20 +10,17 @@ import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URI;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 import java.util.Map;
 
 public class AuthHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        if ("POST".equals(exchange.getRequestMethod())) {
-            // Lấy Data
+        if ("POST".equalsIgnoreCase(exchange.getRequestMethod())) {
+            // Lấy Data từ body
             String postQuery = QueryUtils.convertPostQuery(exchange.getRequestBody());
-            System.out.println(postQuery.toString());
-            // Chuyển query về dạng map để get
-            Map<String, String> params = Utils.parseQuery(postQuery.toString());
+            // Chuyển query về dạng map để lấy
+            Map<String, String> params = Utils.parseQuery(postQuery);
             // Lấy Data, đăng nhập
             String username = params.get("username");
             String password = params.get("password");
@@ -33,26 +30,26 @@ public class AuthHandler implements HttpHandler {
                 String cookie = CookieUtils.createCookie(username);
                 exchange.getResponseHeaders().add("Set-Cookie", cookie);
                 String response = "Login successful!";
-                exchange.sendResponseHeaders(200, response.length());
-                OutputStream os = exchange.getResponseBody();
-                os.write(response.getBytes());
-                os.close();
+                exchange.sendResponseHeaders(200, response.getBytes(StandardCharsets.UTF_8).length);
+                try (OutputStream os = exchange.getResponseBody()) {
+                    os.write(response.getBytes(StandardCharsets.UTF_8));
+                }
             } else {
                 String response = "Invalid credentials!";
-                exchange.sendResponseHeaders(401, response.length());
-                OutputStream os = exchange.getResponseBody();
-                os.write(response.getBytes());
-                os.close();
+                exchange.sendResponseHeaders(401, response.getBytes(StandardCharsets.UTF_8).length);
+                try (OutputStream os = exchange.getResponseBody()) {
+                    os.write(response.getBytes(StandardCharsets.UTF_8));
+                }
             }
         } else {
             // Đọc tệp index.html từ thư mục resources
             InputStream is = getClass().getClassLoader().getResourceAsStream("index.html");
             if (is == null) {
                 String notFoundResponse = "404 (Not Found)\n";
-                exchange.sendResponseHeaders(404, notFoundResponse.length());
-                OutputStream os = exchange.getResponseBody();
-                os.write(notFoundResponse.getBytes(StandardCharsets.UTF_8));
-                os.close();
+                exchange.sendResponseHeaders(404, notFoundResponse.getBytes(StandardCharsets.UTF_8).length);
+                try (OutputStream os = exchange.getResponseBody()) {
+                    os.write(notFoundResponse.getBytes(StandardCharsets.UTF_8));
+                }
                 return;
             }
 
@@ -65,9 +62,9 @@ public class AuthHandler implements HttpHandler {
             exchange.sendResponseHeaders(200, fileBytes.length);
 
             // Ghi dữ liệu vào phản hồi
-            OutputStream os = exchange.getResponseBody();
-            os.write(fileBytes);
-            os.close();
+            try (OutputStream os = exchange.getResponseBody()) {
+                os.write(fileBytes);
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.app.handlers;
 
+import com.app.controller.ServerController;
+import com.app.models.ClientInfo;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -9,6 +11,13 @@ import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
 public class HomeHandler implements HttpHandler {
+
+    public ServerController serverController;
+
+    public HomeHandler(ServerController serverController) {
+        this.serverController = serverController;
+    }
+
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         // Đảm bảo rằng chỉ xử lý phương thức GET
@@ -19,7 +28,7 @@ public class HomeHandler implements HttpHandler {
 
         String clientIP = exchange.getRemoteAddress().getAddress().getHostAddress();
         int clientPort = exchange.getRemoteAddress().getPort();
-        System.out.println("IP: " + clientIP + ", Port: " + clientPort);
+        serverController.addNewClient(new ClientInfo(clientIP, clientPort));
 
 
         // Đọc tệp index.html từ thư mục resources

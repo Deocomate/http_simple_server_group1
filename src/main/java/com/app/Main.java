@@ -2,8 +2,10 @@ package com.app;
 
 import com.app.config.ServerConfig;
 import com.app.controller.ServerController;
+import com.app.models.ClientInfo;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -22,10 +24,11 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Choose a command below: ");
-            System.out.println("1. Start");
-            System.out.println("2. Stop");
-            System.out.println("3. Config");
-            System.out.println("4. exit");
+            System.out.println("1. start");
+            System.out.println("2. stop");
+            System.out.println("3. config");
+            System.out.println("4. client_info");
+            System.out.println("5. exit");
             System.out.print("\nType your command: ");
 
             String command = scanner.nextLine().toLowerCase(); // Chuyển thành chữ thường để tránh lỗi nhập liệu
@@ -80,6 +83,13 @@ public class Main {
                         }
                     } else {
                         System.out.println("No changes detected. Server remains running.");
+                    }
+                    break;
+
+                case "client_info":
+                    List<ClientInfo> clients = controller.getConnectedClients();
+                    for (ClientInfo client : clients) {
+                        System.out.println("Ip: " + client.getIpAddress() + "|| Port: " + client.getPort());
                     }
                     break;
 

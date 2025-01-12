@@ -1,0 +1,43 @@
+2025-01-12 20:05:50 [HTTP-Dispatcher] ERROR com.app.utils.DatabaseUtils - Unable to find application.properties
+2025-01-12 20:09:41 [HTTP-Dispatcher] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-01-12 20:09:41 [HTTP-Dispatcher] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@41b207c0
+2025-01-12 20:09:41 [HTTP-Dispatcher] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-01-12 20:09:41 [HTTP-Dispatcher] INFO  com.app.utils.DatabaseUtils - Database connection pool initialized.
+2025-01-12 20:09:41 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session created for user 'admin', session ID: e4369006-d0f5-4ba5-9ada-c18ddf7c2cca
+2025-01-12 20:09:54 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:09:58 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:09:58 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:09:59 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:09:59 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:09:59 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:09:59 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:10:00 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:10:00 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:10:00 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:10:00 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:10:01 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:19:41 [HTTP-Dispatcher] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-01-12 20:19:41 [HTTP-Dispatcher] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5f6b3078
+2025-01-12 20:19:41 [HTTP-Dispatcher] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-01-12 20:19:41 [HTTP-Dispatcher] INFO  com.app.utils.DatabaseUtils - Database connection pool initialized.
+2025-01-12 20:19:41 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:19:44 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:19:44 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:19:45 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:19:45 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:19:45 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:19:45 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:19:46 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:19:46 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:19:49 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:19:49 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:19:49 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:19:54 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:19:54 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session 'e4369006-d0f5-4ba5-9ada-c18ddf7c2cca' is valid for user 'admin'.
+2025-01-12 20:20:34 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session created for user 'minhlong', session ID: 25ba9d83-ab2f-4247-bd0d-22eca9b85efa
+2025-01-12 20:20:37 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session created for user 'minhlong', session ID: 687f5f33-cb6a-45cc-be5f-690ba7e928e2
+2025-01-12 20:20:41 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session '687f5f33-cb6a-45cc-be5f-690ba7e928e2' is valid for user 'minhlong'.
+2025-01-12 20:20:43 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session '687f5f33-cb6a-45cc-be5f-690ba7e928e2' is valid for user 'minhlong'.
+2025-01-12 20:21:00 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session '687f5f33-cb6a-45cc-be5f-690ba7e928e2' is valid for user 'minhlong'.
+2025-01-12 20:21:02 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session '687f5f33-cb6a-45cc-be5f-690ba7e928e2' is valid for user 'minhlong'.
+2025-01-12 20:21:03 [HTTP-Dispatcher] INFO  com.app.utils.CookieUtils - Session '687f5f33-cb6a-45cc-be5f-690ba7e928e2' is valid for user 'minhlong'.
