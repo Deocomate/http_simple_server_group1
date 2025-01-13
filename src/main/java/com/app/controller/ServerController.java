@@ -9,7 +9,9 @@ import com.app.utils.DatabaseUtils;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
+import java.net.BindException;
 import java.net.InetSocketAddress;
+import java.net.ServerSocket;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -28,6 +30,7 @@ public class ServerController {
         this.config = config;
     }
 
+    // Chạy server
     public void startServer() throws IOException {
         if (isRunning) {
             // Nếu server đang chạy, hiển thị thông báo
@@ -44,20 +47,43 @@ public class ServerController {
         server.createContext("/", new HomeHandler(this));
 
         // Cấu hình executor
-        server.setExecutor(null); // Sử dụng executor mặc định
+        server.setExecutor(null);
         server.start();
-        isRunning = true; // Cập nhật trạng thái server
+        isRunning = true;
         System.out.println("Server is running on http://localhost:" + config.getPort());
     }
 
+    // Dừng server
     public void stopServer() {
         if (isRunning) {
+            server.stop(0);
             isRunning = false;
-            server.stop(0); // Dừng server ngay lập tức
             System.out.println("Server stopped.");
-
-            // Đóng connection pool
-            DatabaseUtils.shutdown();
+            // Giải phóng cổng
+            try {
+                ServerSocket socket = new ServerSocket(config.getPort());
+                socket.close();
+            } catch (BindException e) {
+                System.out.println("Port is still in use. Waiting to be released...");
+                while (true) {
+                    try {
+                        ServerSocket socket = new ServerSocket(config.getPort());
+                        socket.close();
+                        break;
+                    } catch (BindException ex) {
+                        System.out.println("Port is still in use. Waiting to be released...");
+                        try {
+                            Thread.sleep(1000); // Chờ 1 giây
+                        } catch (InterruptedException ex1) {
+                            Thread.currentThread().interrupt();
+                        }
+                    } catch (IOException ex) {
+                        System.out.println("Error releasing port.");
+                    }
+                }
+            } catch (IOException e) {
+                System.out.println("Error releasing port.");
+            }
         } else {
             System.out.println("Server is not running.");
         }
@@ -68,7 +94,7 @@ public class ServerController {
         config.setPort(port);
     }
 
-    // set đường dẫn đến file hệ thống của http server
+    // set đường dẫn
     public void setFilePath(String filePath) {
         config.setFilePath(filePath);
     }

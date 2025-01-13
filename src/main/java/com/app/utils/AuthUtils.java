@@ -19,17 +19,15 @@ public class AuthUtils {
      * @return true nếu thông tin đăng nhập hợp lệ, ngược lại false
      */
     public static boolean authenticate(String username, String password) {
-        // Câu truy vấn sử dụng PreparedStatement để ngăn chặn SQL Injection
+        // Câu truy vấn sử dụng PreparedStatement để chặn SQL Injection
         String query = "SELECT COUNT(*) FROM admin WHERE username = ? AND password = ?";
 
         // Sử dụng try-with-resources để tự động đóng các tài nguyên
         try (Connection connection = DatabaseUtils.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            // Đặt các tham số cho PreparedStatement
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
 
-            // Thực thi câu truy vấn
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     int count = resultSet.getInt(1);
@@ -43,7 +41,6 @@ public class AuthUtils {
 
         } catch (SQLException e) {
             logger.error("Database error during authentication for user '{}': {}", username, e.getMessage());
-            // Bạn có thể xử lý ngoại lệ theo cách phù hợp với ứng dụng của bạn
         }
 
         return false; // Trả về false nếu có lỗi xảy ra hoặc không tìm thấy bản ghi nào

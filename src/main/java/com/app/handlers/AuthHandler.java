@@ -42,7 +42,7 @@ public class AuthHandler implements HttpHandler {
                 }
             }
         } else {
-            // Đọc tệp index.html từ thư mục resources
+            // Đọc file index.html từ resources
             InputStream is = getClass().getClassLoader().getResourceAsStream("index.html");
             if (is == null) {
                 String notFoundResponse = "404 (Not Found)\n";

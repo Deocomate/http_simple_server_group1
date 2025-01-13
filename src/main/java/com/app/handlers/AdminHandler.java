@@ -35,7 +35,6 @@ public class AdminHandler implements HttpHandler {
             return;
         }
 
-        // Giả sử chỉ có một header "Cookie", bạn có thể điều chỉnh nếu có nhiều hơn
         String cookieHeader = cookieHeaders.get(0);
 
         // Phân tách các cookie thành một Map
@@ -58,7 +57,7 @@ public class AdminHandler implements HttpHandler {
             return;
         }
 
-        // Nếu đã xác thực, lấy danh sách các client và tạo nội dung HTML
+        // Nếu đã xác thực thì lấy danh sách các client
         List<ClientInfo> clients = controller.getConnectedClients();
 
         StringBuilder htmlBuilder = new StringBuilder();
